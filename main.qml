@@ -22,14 +22,9 @@ Window {
 
     // Video player wrapper
     Item {
-        objectName: "player_wrapper"
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-            bottomMargin: 60
-        }
+        anchors.bottomMargin: 60
+        width: parent.width
+        height: parent.height
 
         MediaPlayer {
             id: player
@@ -57,6 +52,15 @@ Window {
 
         Component.onCompleted: {
             player.play();
+        }
+
+        // For dragging
+        Drag.active: dragArea.drag.active
+        MouseArea {
+            id: dragArea
+            anchors.fill: parent
+
+            drag.target: parent
         }
     }
 
