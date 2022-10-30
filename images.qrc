@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>play.png</file>
-        <file>pause.png</file>
-        <file>change_video.png</file>
+        <file>images/change_video.png</file>
+        <file>images/pause.png</file>
+        <file>images/play.png</file>
     </qresource>
 </RCC>

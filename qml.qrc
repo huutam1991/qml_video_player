@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>SeekControl.qml</file>
+        <file>src/main.qml</file>
+        <file>src/SeekControl.qml</file>
     </qresource>
 </RCC>
