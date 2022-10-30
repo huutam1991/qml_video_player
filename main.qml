@@ -10,6 +10,7 @@ Window {
     visible: true
     title: qsTr("Video Player")
 
+    // Background
     Rectangle {
         anchors.fill: parent
         color: "black"
@@ -19,6 +20,7 @@ Window {
         console.log("onCompleted")
     }
 
+    // Video player wrapper
     Item {
         objectName: "player_wrapper"
         anchors {
@@ -58,6 +60,7 @@ Window {
         }
     }
 
+    // Progress bar
     SeekControl {
         id: seek
         anchors {
@@ -72,6 +75,7 @@ Window {
         onSeekPositionChanged: player.seek(seekPosition);
     }
 
+    // Play-Pause button
     Button {
         id: play_button
         anchors {
@@ -101,8 +105,8 @@ Window {
         }
     }
 
+    // Load video button
     signal changeVideoSignal()
-
     Button {
         id: button_change_video
         anchors {
