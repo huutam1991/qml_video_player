@@ -22,6 +22,7 @@ Window {
 
     // Video player wrapper
     Item {
+        id: video_wrapper
         anchors.bottomMargin: 60
         width: parent.width
         height: parent.height
@@ -54,13 +55,39 @@ Window {
             player.play();
         }
 
-        // For dragging
-        Drag.active: dragArea.drag.active
-        MouseArea {
-            id: dragArea
+        // For zooming + dragging
+        PinchArea {
             anchors.fill: parent
-
-            drag.target: parent
+            pinch.target: video_wrapper
+            pinch.minimumRotation: -360
+            pinch.maximumRotation: 360
+            pinch.minimumScale: 0.1
+            pinch.maximumScale: 10
+            pinch.dragAxis: Pinch.XAndYAxis
+            MouseArea {
+               id: dragArea
+               hoverEnabled: true
+               anchors.fill: parent
+               drag.target: video_wrapper
+               scrollGestureEnabled: false  // 2-finger-flick gesture should pass through to the Flickable
+               onPressed: {
+                   video_wrapper.z = ++root.highestZ;
+                   parent.setFrameColor();
+               }
+               onWheel: {
+                   if (wheel.modifiers & Qt.ControlModifier) {
+                       video_wrapper.rotation += wheel.angleDelta.y / 120 * 5;
+                       if (Math.abs(video_wrapper.rotation) < 4)
+                           video_wrapper.rotation = 0;
+                   } else {
+                       video_wrapper.rotation += wheel.angleDelta.x / 120;
+                       if (Math.abs(video_wrapper.rotation) < 0.6)
+                           video_wrapper.rotation = 0;
+                       var scaleBefore = video_wrapper.scale;
+                       video_wrapper.scale += video_wrapper.scale * wheel.angleDelta.y / 120 / 10;
+                   }
+               }
+            }
         }
     }
 
