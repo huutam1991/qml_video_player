@@ -65,6 +65,13 @@ Item {
         color: "white"
         opacity: 0.3
         radius: parent.height / 15
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: (mouseEvent) => {
+                seekControl.seekPosition = mouseEvent.x*seekControl.duration / background.width
+            }
+        }
     }
 
     Rectangle {
