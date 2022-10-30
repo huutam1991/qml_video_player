@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>play.png</file>
         <file>pause.png</file>
+        <file>change_video.png</file>
     </qresource>
 </RCC>

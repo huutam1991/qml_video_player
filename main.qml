@@ -15,7 +15,12 @@ Window {
         color: "black"
     }
 
+    Component.onCompleted: {
+        console.log("onCompleted")
+    }
+
     Item {
+        objectName: "player_wrapper"
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -26,11 +31,20 @@ Window {
 
         MediaPlayer {
             id: player
+            objectName: "player"
             source: "qrc:/file_1.mp4"
             onError: (error, errorString) => {
                 console.log("Video error = ", errorString)
             }
             onStopped: button_img.source = "qrc:/play.png"
+
+            function change_video(video_name: string): string {
+                player.stop();
+                player.source = video_name;
+                player.play();
+
+                return "OK";
+            }
         }
 
         VideoOutput {
@@ -84,6 +98,31 @@ Window {
                 player.play();
                 button_img.source = "qrc:/pause.png";
             }
+        }
+    }
+
+    signal changeVideoSignal()
+
+    Button {
+        id: button_change_video
+        anchors {
+            left: parent.left
+            leftMargin: 10
+            bottom: parent.bottom
+            bottomMargin: 5
+        }
+        width: 25
+        height: 25
+
+        Image {
+            anchors.fill: parent;
+            anchors.margins: 2
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/change_video.png"
+        }
+
+        onClicked: {
+            window.changeVideoSignal()
         }
     }
 }
