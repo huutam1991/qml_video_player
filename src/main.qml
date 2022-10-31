@@ -70,10 +70,7 @@ Window {
                anchors.fill: parent
                drag.target: video_wrapper
                scrollGestureEnabled: false  // 2-finger-flick gesture should pass through to the Flickable
-               onPressed: {
-                   video_wrapper.z = ++root.highestZ;
-                   parent.setFrameColor();
-               }
+
                onWheel: {
                    if (wheel.modifiers & Qt.ControlModifier) {
                        video_wrapper.rotation += wheel.angleDelta.y / 120 * 5;
